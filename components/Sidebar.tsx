@@ -5,6 +5,7 @@ import Link from "next/link";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { AiOutlineMenu, AiFillHome } from "react-icons/ai";
 import { ImCancelCircle } from "react-icons/im";
+
 import { client } from "../utils/client";
 import Discover from "./Discover";
 import SuggestedAccounts from "./SuggestedAccounts";
@@ -17,7 +18,7 @@ const Sidebar = () => {
   return (
     <div className="">
       <div
-        className="block xl:hidden m-2 mt-3 ml-4 text-xl"
+        className="block xl:hidden m-2 ml-4 mt-3 text-xl"
         onClick={() => setShowSidebar((prev) => !prev)}
       >
         {showSidebar ? <ImCancelCircle /> : <AiOutlineMenu />}
