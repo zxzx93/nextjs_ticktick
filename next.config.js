@@ -2,6 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+  images: {
+    //   domains:
+    //     ["yt3.ggpht.com"]
+    // },
+    domains: ["res.cloudinary.com"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
