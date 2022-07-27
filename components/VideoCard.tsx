@@ -15,9 +15,15 @@ interface Iprops {
 const VideoCard: NextPage<Iprops> = ({ post }) => {
   const [isHover, setIsHover] = useState(false); //비디오 호버 상태
   const [playing, setPlaying] = useState(false); //비디오 재생
-  const [isVideoMuted, setIsVideoMuted] = useState(false); //비디오 음소거
+  const [isVideoMuted, setIsVideoMuted] = useState(false); //비디오 볼륨 음소거
 
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef?.current) {
+      videoRef.current.muted = isVideoMuted;
+    }
+  }, [isVideoMuted]);
 
   const onVideoPress = () => {
     if (playing) {
@@ -28,6 +34,7 @@ const VideoCard: NextPage<Iprops> = ({ post }) => {
       setPlaying(true);
     }
   };
+
   return (
     <div className="flex flex-col border-b-2 border-gray-200 pb-6">
       <div>
@@ -63,13 +70,13 @@ const VideoCard: NextPage<Iprops> = ({ post }) => {
         </div>
       </div>
 
-      <div className="flex lg:ml-20 gap-4 relative">
+      <div className="lg:ml-20 flex gap-4 relative">
         <div
           className="rounded-3xl"
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
         >
-          <Link href={"/"}>
+          <Link href={`/detail/${post._id}`}>
             <video
               className="lg:w-[600px] h-[300px] md:h-[400px] lg:h-[528px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
               loop
