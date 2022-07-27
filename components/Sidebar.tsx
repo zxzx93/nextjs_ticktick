@@ -39,31 +39,6 @@ const Sidebar = () => {
             </Link>
           </div>
 
-          {!userProfile && (
-            <div className="px-2 py-4 hidden xl:block">
-              <p className="text-gray-400">
-                로그인 후 좋아요와 댓글을 남길 수 있습니다.
-              </p>
-              <div className="pr-4">
-                <GoogleLogin
-                  clientId=""
-                  render={(renderProps) => (
-                    <button
-                      className="bg-white text-lg text-[#f51997] border-[1px] font-semiboid px-6 py-3 rounded-md outline-none border-[#f51997] w-full mt-3 hover:text-white hover:bg-[#f51997] cursor-pointer"
-                      onClick={renderProps.onClick}
-                      disabled={renderProps.disabled}
-                    >
-                      Log in
-                    </button>
-                  )}
-                  onSuccess={() => {}}
-                  onFailure={() => {}}
-                  cookiePolicy="single_host_origin"
-                />
-              </div>
-            </div>
-          )}
-
           <Discover />
           <SuggestedAccounts />
           <Footer />
