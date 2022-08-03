@@ -6,7 +6,7 @@ import { HiVolumeUp, HiVolumeOff } from "react-icons/hi";
 import { BsFillPlayFill, BsFillPauseFill, BsPlay } from "react-icons/bs";
 import { GoVerified } from "react-icons/go";
 
-import { Video } from "../types.d";
+import { Video } from "../types";
 
 interface Iprops {
   post: Video;
@@ -40,7 +40,7 @@ const VideoCard: NextPage<Iprops> = ({ post }) => {
       <div>
         <div className="flex gap-3 cursor-pointer p-2 font-semibold rounded">
           <div className="md:w-16 md:h-16 w-10 h-10">
-            <Link href={"/"}>
+            <Link href={`/profile/${post.postedBy._id}`}>
               <>
                 <Image
                   className="rounded-full "
@@ -55,7 +55,7 @@ const VideoCard: NextPage<Iprops> = ({ post }) => {
           </div>
 
           <div>
-            <Link href={"/"}>
+            <Link href={`/profile/${post.postedBy._id}`}>
               <div className="flex items-center gap-2">
                 <p className="flex gap-2 items-center md:text-md font-blod text-primary">
                   {post.postedBy.userName}
