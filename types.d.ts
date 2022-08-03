@@ -24,7 +24,14 @@ export interface Video {
     _key: string;
     postedBy: {
       _ref: string;
+      _id: string;
     };
   }[];
   userId: string;
+}
+export interface IUser {
+  _id: string;
+  _type: string;
+  userName: string;
+  image: string;
 }
