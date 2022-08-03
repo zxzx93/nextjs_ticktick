@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+} from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,6 +29,8 @@ const Detail = ({ postDetails }: IProps) => {
   const [post, setPost] = useState(postDetails); //초기값 postDetails
   const [playing, setPlaying] = useState(false); //비디오 재생
   const [isVideoMuted, setIsVideoMuted] = useState(false); //비디오 볼륨 음소거
+  const [comment, setComment] = useState(""); //댓글 input
+  const [isPostingComment, setIsPostingComment] = useState(false); //댓글 올리는 버튼 클릭시 true로 바뀜
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -54,6 +60,23 @@ const Detail = ({ postDetails }: IProps) => {
         like,
       });
       setPost({ ...post, likes: res.data.likes });
+    }
+  };
+
+  const addComment = async (e: any) => {
+    e.preventDefault();
+
+    if (userProfile && comment) {
+      setIsPostingComment(true);
+
+      const res = await axios.put(`${BASE_URL}/api/post/${post._id}`, {
+        userId: userProfile._id,
+        comment,
+      });
+
+      setPost({ ...post, comments: res.data.comments });
+      setComment("");
+      setIsPostingComment(false);
     }
   };
 
@@ -132,7 +155,7 @@ const Detail = ({ postDetails }: IProps) => {
             </div>
           </div>
 
-          <p className="px-10 text-lg text-gray-600 "> {post.caption} </p>
+          <p className="px-10 text-lg text-gray-600 ">{post.caption}</p>
 
           <div className="mt-10 px-10">
             {userProfile && (
@@ -143,7 +166,13 @@ const Detail = ({ postDetails }: IProps) => {
               />
             )}
           </div>
-          <Comments />
+          <Comments
+            comment={comment}
+            comments={post.comments}
+            setComment={setComment}
+            addComment={addComment}
+            isPostingComment={isPostingComment}
+          />
         </div>
       </div>
     </div>
