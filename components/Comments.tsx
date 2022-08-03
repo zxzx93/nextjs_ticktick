@@ -40,9 +40,9 @@ const Comments = ({
         {comments?.length > 0 ? (
           <div>
             {comments.map((item, idx) => (
-              <>
+              <div key={idx}>
                 {allUsers.map(
-                  (user: IUser) =>
+                  (user: IUser, idx) =>
                     user._id === (item.postedBy._id || item.postedBy._ref) && (
                       <div key={idx} className="p-2 items-center">
                         <Link href={`/profile/${user._id}}`}>
@@ -73,7 +73,7 @@ const Comments = ({
                       </div>
                     )
                 )}
-              </>
+              </div>
             ))}
           </div>
         ) : (
