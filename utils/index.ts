@@ -14,6 +14,6 @@ export const createOrGetUser = async (res: any, addUser: any) => {
   const { name, picture, sub } = decode;
   const user = { _id: sub, _type: "user", userName: name, image: picture };
 
-  addUser(user) //sustand store에 추가
+  addUser(user);  //sustand store에 추가
   await axios.post(`${BASE_URL}/api/auth`, user);
 };
